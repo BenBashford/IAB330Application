@@ -84,6 +84,8 @@
         android:layout_height="wrap_content"
         android:text="Language"
         android:layout_margin="30dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/navbarLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -96,6 +98,7 @@
         android:layout_height="wrap_content"
         android:text="English (Dropdown)"
         android:layout_margin="5dp"
+        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/textView1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -106,6 +109,8 @@
         android:layout_height="wrap_content"
         android:text="Colourblind Mode"
         android:layout_margin="30dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/textView2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
@@ -126,6 +131,8 @@
         android:layout_height="wrap_content"
         android:text="Privacy Settings"
         android:layout_margin="30dp"
+        android:textColor="#000000"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
@@ -136,6 +143,7 @@
         android:layout_height="wrap_content"
         android:text="View and Change (Dropdown)"
         android:layout_margin="5dp"
+        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
@@ -146,6 +154,9 @@
         android:layout_height="wrap_content"
         android:text="Other Settings"
         android:layout_margin="30dp"
+        android:textColor="#000000"
+
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/textView5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
@@ -156,6 +167,7 @@
         android:layout_height="wrap_content"
         android:text="View and Change (Dropdown)"
         android:layout_margin="5dp"
+        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
