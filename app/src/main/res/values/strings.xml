@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Navigation Prototype</string>
     <string name="title_activity_maps">MapsActivity</string>
+    <string name="maps_api_key">AIzaSyBi9UHXNCAuhHRkUkwROfAGQbX_soIJG5U</string>
 </resources>
