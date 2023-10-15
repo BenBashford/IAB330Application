@@ -78,14 +78,17 @@
             />
     </LinearLayout>
 
-    <ImageView
+
+
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:map="http://schemas.android.com/apk/res-auto"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:id="@+id/map"
         android:layout_width="375dp"
         android:layout_height="354dp"
-        app:srcCompat="@drawable/map"
         app:layout_constraintTop_toBottomOf="@+id/navbarLayout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"  />
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <LinearLayout
         android:id="@+id/horizontalLayout"
