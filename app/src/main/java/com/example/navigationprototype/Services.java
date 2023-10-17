@@ -1,11 +1,21 @@
 package com.example.navigationprototype;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.LiveData;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import com.example.navigationprototype.DB.Catagory;
+import com.example.navigationprototype.DB.CatagoryDAO;
+import com.example.navigationprototype.DB.Service;
+import com.example.navigationprototype.DB.ServiceDAO;
+import com.example.navigationprototype.Utils.MyApp;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Services extends AppCompatActivity {
 
@@ -14,6 +24,10 @@ public class Services extends AppCompatActivity {
     private ImageView criticalButton;
     private ImageView nearbyButton;
     private ImageView settingsButton;
+
+    ArrayList<Service> services;
+
+    ServicesAdapter Sadapter;
 
     private Button service1;
 
@@ -76,7 +90,21 @@ public class Services extends AppCompatActivity {
             startActivity(intent);
         });
 
+        services=new ArrayList<>();
+        Intent intent = getIntent();
+        int catagory = intent.getExtras().getInt("id");
+        GetDbContent(catagory);
+    }
 
+    private void GetDbContent(int catagory) {
+        ServiceDAO serviceDao = MyApp.getAppDatabase().serviceDao();
+        LiveData<List<Service>> ServicesLiveData = serviceDao.getCurrentServices(catagory);
+        ServicesLiveData.observe(this, CList -> {
+            // Handle the list of vehicles here
+            services.clear();
+            services.addAll(CList);
+            Sadapter.notifyDataSetChanged();
+        });
     }
 
     private void setViewIds() {
