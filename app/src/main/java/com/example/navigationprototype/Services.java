@@ -2,11 +2,15 @@ package com.example.navigationprototype;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.LiveData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.navigationprototype.DB.Catagory;
 import com.example.navigationprototype.DB.CatagoryDAO;
@@ -25,19 +29,12 @@ public class Services extends AppCompatActivity {
     private ImageView nearbyButton;
     private ImageView settingsButton;
 
+    private RecyclerView recyclerView;
+
     ArrayList<Service> services;
 
     ServicesAdapter Sadapter;
 
-    private Button service1;
-
-    private Button service2;
-
-    private Button service3;
-
-    private Button service4;
-
-    private Button service5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,39 +62,36 @@ public class Services extends AppCompatActivity {
                     Settings.class);
             startActivity(intent);
         });
-        service1.setOnClickListener(view -> {
-            Intent intent = new Intent(this,
-                    Information.class);
-            startActivity(intent);
-        });
-        service2.setOnClickListener(view -> {
-            Intent intent = new Intent(this,
-                    Information.class);
-            startActivity(intent);
-        });
-        service3.setOnClickListener(view -> {
-            Intent intent = new Intent(this,
-                    Information.class);
-            startActivity(intent);
-        });service4.setOnClickListener(view -> {
-            Intent intent = new Intent(this,
-                    Information.class);
-            startActivity(intent);
-        });
-        service5.setOnClickListener(view -> {
-            Intent intent = new Intent(this,
-                    Information.class);
-            startActivity(intent);
-        });
 
         services=new ArrayList<>();
         Intent intent = getIntent();
         int catagory = intent.getExtras().getInt("id");
         GetDbContent(catagory);
+
+        recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Sadapter = new ServicesAdapter(services);
+        recyclerView.setAdapter(Sadapter);
+
+        Sadapter.setOnItemClickListener(position -> {
+            int serviceid = services.get(position).getId();
+            String testoutput = String.valueOf(serviceid);
+
+            Toast.makeText(Services.this, testoutput, Toast.LENGTH_SHORT).show();
+            Intent toInformation = new Intent( Services.this, Information.class);
+            toInformation.putExtra("id",serviceid);
+            startActivity(toInformation);
+        });
+
     }
 
     private void GetDbContent(int catagory) {
         ServiceDAO serviceDao = MyApp.getAppDatabase().serviceDao();
+
+        //AsyncTask.execute(() -> {
+        //    serviceDao.Insert(new Service("test1","Lorem Ipsum", 1, 1, 1, 1, "w"));
+        //});
+
         LiveData<List<Service>> ServicesLiveData = serviceDao.getCurrentServices(catagory);
         ServicesLiveData.observe(this, CList -> {
             // Handle the list of vehicles here
@@ -112,10 +106,5 @@ public class Services extends AppCompatActivity {
         criticalButton= findViewById(R.id.critical);
         nearbyButton = findViewById(R.id.nearby);
         settingsButton = findViewById(R.id.settings);
-        service1 = findViewById(R.id.button1);
-        service2 = findViewById(R.id.button2);
-        service3 = findViewById(R.id.button3);
-        service4 = findViewById(R.id.button4);
-        service5 = findViewById(R.id.button5);
     }
 }

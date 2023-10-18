@@ -83,6 +83,11 @@ public class Categories extends AppCompatActivity {
     }
     private void GetDbContent() {
         CatagoryDAO catagoryDao = MyApp.getAppDatabase().catagoryDao();
+
+        //AsyncTask.execute(() -> {
+        //    catagoryDao.Insert(new Catagory("test1"));
+        //});
+
         LiveData<List<Catagory>> CatagoriesLiveData = catagoryDao.getAllcatagories();
         CatagoriesLiveData.observe(this, CList -> {
             // Handle the list of vehicles here
