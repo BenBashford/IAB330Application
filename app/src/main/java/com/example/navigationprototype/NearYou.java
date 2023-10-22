@@ -21,6 +21,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -149,6 +150,13 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap map) {
         this.map = map;
+
+        boolean success = map.setMapStyle(new MapStyleOptions(getResources()
+                .getString(R.string.style_json)));
+
+        if (!success) {
+            Log.e(TAG, "Style parsing failed.");
+        }
 
         // ...
 
