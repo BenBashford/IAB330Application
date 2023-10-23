@@ -70,6 +70,8 @@
                         android:src="@drawable/baseline_location_on_24"/>
 
                     <EditText
+                        android:id="@+id/et_address1"
+                        android:enabled="false"
                         android:layout_width="match_parent"
                         android:singleLine="true"
                         android:layout_height="wrap_content"/>
@@ -86,9 +88,18 @@
                         android:src="@drawable/baseline_location_on_24"/>
 
                     <EditText
-                        android:layout_width="match_parent"
+                        android:id="@+id/et_address2"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:singleLine="true"
+                        android:enabled="false"
                         android:layout_height="wrap_content"/>
+                    <ImageView
+                        android:id="@+id/iv_search"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="10dp"
+                        android:src="@drawable/baseline_search_24"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -105,5 +116,7 @@
 
         </LinearLayout>
     </LinearLayout>
+
+
 
 </RelativeLayout>
