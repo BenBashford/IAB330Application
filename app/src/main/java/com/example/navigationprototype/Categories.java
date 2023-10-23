@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.example.navigationprototype.DB.Catagory;
 import com.example.navigationprototype.DB.CatagoryDAO;
 import com.example.navigationprototype.Utils.MyApp;
+import com.example.navigationprototype.R;
 
 import java.util.ArrayList;
 import java.util.List;

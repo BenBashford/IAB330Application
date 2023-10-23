@@ -15,7 +15,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#F5F5F5"
         >
 
 
@@ -28,7 +27,7 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:textColor="#000000"
+            android:textColor="@color/font_color1"
             />
 
         <ImageView
@@ -36,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/house_icon_512x471_t03b54sj"
+            android:src="@drawable/baseline_home_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -48,7 +47,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/phone_call"
+            android:src="@drawable/baseline_call_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -60,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/free_location_icon_2952_thumb"
+            android:src="@drawable/baseline_location_on_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -72,7 +71,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/_26472"
+            android:src="@drawable/baseline_settings_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -92,7 +91,8 @@
 
     <Button
         android:id="@+id/contactButton"
-        android:backgroundTint="#000000"
+        android:backgroundTint="@color/bg_color2"
+        android:textColor="@color/bg_color1"
         android:layout_margin="20dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -108,16 +108,16 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textColor="#000000"
+        android:textColor="@color/font_color1"
         android:padding="10dp"
-        android:background="#E5E5E5"
         android:text="An all-in-one emergency app that helps users report various emergencies, provides location-based recommendations, supports multiple languages, and offers real-time tracking and notifications for swift assistance."
         app:layout_constraintTop_toBottomOf="@+id/contactButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
     <Button
         android:id="@+id/servicesButton"
-        android:backgroundTint="#000000"
+        android:backgroundTint="@color/bg_color2"
+        android:textColor="@color/bg_color1"
         android:layout_margin="50dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -127,7 +127,8 @@
         app:layout_constraintEnd_toEndOf="parent" />
     <Button
         android:id="@+id/categoriesButton"
-        android:backgroundTint="#000000"
+        android:backgroundTint="@color/bg_color2"
+        android:textColor="@color/bg_color1"
         android:layout_margin="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

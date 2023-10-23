@@ -27,6 +27,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
+import com.example.navigationprototype.R;
 
 
 public class NearYou extends AppCompatActivity implements OnMapReadyCallback {

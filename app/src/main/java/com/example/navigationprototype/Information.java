@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.example.navigationprototype.R;
+
 public class Information extends AppCompatActivity {
 
 

@@ -13,7 +13,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:background="#F5F5F5"
         >
 
 
@@ -26,7 +25,6 @@
             android:gravity="center"
             android:textStyle="bold"
             android:textSize="24sp"
-            android:textColor="#000000"
             />
 
         <ImageView
@@ -34,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/house_icon_512x471_t03b54sj"
+            android:src="@drawable/baseline_home_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -46,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/phone_call"
+            android:src="@drawable/baseline_call_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -58,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/free_location_icon_2952_thumb"
+            android:src="@drawable/baseline_location_on_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -70,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/_26472"
+            android:src="@drawable/baseline_settings_24"
             android:clickable="true"
             android:onClick="onImageViewClick"
             android:layout_marginStart="8dp"
@@ -84,34 +82,32 @@
         android:layout_height="wrap_content"
         android:text="Language"
         android:layout_margin="30dp"
-        android:textColor="#000000"
         android:textStyle="bold"
+        android:textColor="@color/font_color1"
         app:layout_constraintTop_toBottomOf="@+id/navbarLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_language"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="English (Dropdown)"
+        android:entries="@array/languages"
         android:layout_margin="5dp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/textView1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Colourblind Mode"
+        android:textColor="@color/font_color1"
         android:layout_margin="30dp"
-        android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_language"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
 
@@ -131,22 +127,22 @@
         android:layout_height="wrap_content"
         android:text="Privacy Settings"
         android:layout_margin="30dp"
-        android:textColor="#000000"
+        android:textColor="@color/font_color1"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
 
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_privacy"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="View and Change (Dropdown)"
+        android:entries="@array/privacys"
         android:layout_margin="5dp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/textView4"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"  />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
     <TextView
         android:id="@+id/textView6"
@@ -154,22 +150,21 @@
         android:layout_height="wrap_content"
         android:text="Other Settings"
         android:layout_margin="30dp"
-        android:textColor="#000000"
-
+        android:textColor="@color/font_color1"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintTop_toBottomOf="@+id/spinner_privacy"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"  />
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
+    <Spinner
+        android:id="@+id/spinner_other"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="View and Change (Dropdown)"
+        android:entries="@array/others"
         android:layout_margin="5dp"
-        android:textColor="#000000"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"  />
+        app:layout_constraintEnd_toEndOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

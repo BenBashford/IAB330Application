@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.navigationprototype.R;
+
 public class Services extends AppCompatActivity {
 
 

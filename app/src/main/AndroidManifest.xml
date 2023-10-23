@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools" >
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
-
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <permission
+        android:name="com.example.navigationprototype.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
     <application
         android:name=".Utils.MyApp"
         android:allowBackup="true"
@@ -16,7 +20,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NavigationPrototype"
-        tools:targetApi="31">
+        tools:targetApi="31"
+        android:networkSecurityConfig="@xml/network_sercurity_config">
+
 
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
@@ -31,7 +37,11 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="YOUR_API_KEY" />
+
+        <activity
+            android:name=".MapToHereActivity"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -60,7 +70,7 @@
             android:exported="false" />
         <activity
             android:name=".Landing"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

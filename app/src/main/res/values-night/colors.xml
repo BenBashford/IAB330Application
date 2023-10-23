@@ -8,9 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="font_color1">#FF000000</color>
-    <color name="font_lcolor2">#FFFFFFFF</color>
+    <color name="font_color1">#FFFFFFFF</color>
+    <color name="font_lcolor2">#FF000000</color>
 
-    <color name="bg_color1">#FFFFFFFF</color>
-    <color name="bg_color2">#FF000000</color>
+    <color name="bg_color1">#FF000000</color>
+    <color name="bg_color2">#FFFFFFFF</color>
 </resources>

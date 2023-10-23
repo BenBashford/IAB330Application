@@ -13,7 +13,7 @@ public class MyApp extends Application{
 
     public static final String PREF_NAME = "MyAppPrefs";
     private static SharedPreferences preferences;
-
+    public static boolean isNight = false;
     @Override
     public void onCreate() {
         super.onCreate();
