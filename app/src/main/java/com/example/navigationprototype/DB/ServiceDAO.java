@@ -26,4 +26,7 @@ public interface ServiceDAO {
         @Query("Select * FROM Services WHERE catagory = :catagory")
         LiveData<List<Service>> getCurrentServices(int catagory);
 
+        @Query("Select * FROM Services WHERE id = :id")
+        LiveData<List<Service>> getThiseService(int id);
+
 }
