@@ -61,7 +61,7 @@ public class Information extends AppCompatActivity {
 
         Intent intent2 = getIntent();
         int id = intent2.getExtras().getInt("id");
-        GetDbContent(1);
+        GetDbContent(id);
 
     }
 

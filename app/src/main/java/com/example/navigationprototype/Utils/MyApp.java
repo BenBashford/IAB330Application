@@ -7,6 +7,8 @@ import android.util.Log;
 import androidx.room.Room;
 
 import com.example.navigationprototype.DB.AppDatabase;
+import com.example.navigationprototype.DataPopulation;
+
 public class MyApp extends Application{
     private static AppDatabase appDatabase;
     private static String DATABASE_NAME = "EmergenciesDB";
@@ -22,6 +24,12 @@ public class MyApp extends Application{
                 AppDatabase.class, DATABASE_NAME).build();
         preferences = getSharedPreferences(PREF_NAME,
                 MODE_PRIVATE);
+
+
+//      Uncomment and run this code when making changes to the database. This clears the current tables, resets the primary keys and then repopulates the database with the new entries.
+//        DataPopulation dataPopulation = new DataPopulation(appDatabase.catagoryDao(), appDatabase.serviceDao());
+//        dataPopulation.clear();
+//        dataPopulation.populateData();
     }
 
     public static AppDatabase getAppDatabase() {

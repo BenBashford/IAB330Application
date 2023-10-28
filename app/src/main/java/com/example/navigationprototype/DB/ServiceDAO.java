@@ -20,6 +20,9 @@ public interface ServiceDAO {
         @Delete
         void Delete(Service service);
 
+        @Query("DELETE FROM services")
+        void deleteAllServices();
+
         @Query("SELECT * FROM Services")
         LiveData<List<Service>> getAllservices();
 

@@ -21,6 +21,13 @@ public interface CatagoryDAO {
     @Delete
     void Delete(Catagory catagory);
 
+    @Query("DELETE FROM catagories")
+    void deleteAllCategories();
+
+    @Query("DELETE FROM sqlite_sequence")
+    void clearPrimaryKeyIndex();
+
+
     @Query("SELECT * FROM catagories")
     LiveData<List<Catagory>> getAllcatagories();
 

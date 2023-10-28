@@ -10,12 +10,12 @@ public class Service {
     public String name;
     public int catagory;
     public String description;
-    public int latitude;
-    public int longditude;
+    public double latitude;
+    public double longditude;
     public int number;
     public String adress;
 
-    public Service (String name, String description, int catagory, int latitude, int longditude, int number, String adress) {
+    public Service (String name, String description, int catagory, double latitude, double longditude, int number, String adress) {
         this.name = name;
         this.description = description;
         this.catagory = catagory;
@@ -55,14 +55,14 @@ public class Service {
     public void setCatagory(int catagory) {
         this.catagory = catagory;
     }
-    public int getLatitude() {
+    public double getLatitude() {
         return latitude;
     }
     public void setLatitude(int latitude) {
         this.latitude = latitude;
     }
 
-    public int getLongditude() {
+    public double getLongditude() {
         return longditude;
     }
     public void setLongditudeint (int longditude) {this.longditude = longditude;
