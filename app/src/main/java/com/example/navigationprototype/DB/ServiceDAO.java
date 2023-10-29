@@ -32,4 +32,7 @@ public interface ServiceDAO {
         @Query("Select * FROM Services WHERE id = :id")
         LiveData<List<Service>> getThiseService(int id);
 
+        @Query("SELECT * FROM Services")
+        LiveData<List<Service>> getAllServices();
+
 }

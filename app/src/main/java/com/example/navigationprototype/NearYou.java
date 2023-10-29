@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.navigationprototype.DB.Service;
+import com.example.navigationprototype.DB.ServiceDAO;
+import com.example.navigationprototype.Utils.MyApp;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -29,6 +32,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.util.List;
+
 
 public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
 
@@ -42,10 +47,10 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
     // The entry point to the Fused Location Provider.
     private FusedLocationProviderClient fusedLocationProviderClient;
 
-    // A default location (Sydney, Australia) and default zoom to use when location permission is
+    // A default location and default zoom to use when location permission is
     // not granted.
-    private final LatLng defaultLocation = new LatLng(-33.8523341, 151.2106085);
-    private static final int DEFAULT_ZOOM = 15;
+    private final LatLng defaultLocation = new LatLng(-27.4773, 153.0270);
+    private static final int DEFAULT_ZOOM = 14;
     private static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1;
     private boolean locationPermissionGranted;
 
@@ -85,6 +90,7 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
 
         // Construct a FusedLocationProviderClient.
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
 
 
 
@@ -151,12 +157,28 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap map) {
         this.map = map;
 
-        boolean success = map.setMapStyle(new MapStyleOptions(getResources()
-                .getString(R.string.style_json)));
+//        boolean success = map.setMapStyle(new MapStyleOptions(getResources()
+//                .getString(R.string.style_json)));
+//
+//        if (!success) {
+//            Log.e(TAG, "Style parsing failed.");
+//        }
 
-        if (!success) {
-            Log.e(TAG, "Style parsing failed.");
-        }
+
+        ServiceDAO serviceDAO = MyApp.getAppDatabase().serviceDao();
+        serviceDAO.getAllServices().observe(this, services -> {
+            // Update the map with the new list of services
+            for (Service service : services) {
+                LatLng serviceLocation = new LatLng(service.getLatitude(), service.getLongitude());
+
+                // Add a marker for each service
+                map.addMarker(new MarkerOptions()
+                                .position(serviceLocation)
+                                .title(service.getName())
+                        // Add additional information as needed
+                );
+            }
+        });
 
         // ...
 
@@ -201,8 +223,12 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
                                 lastKnownLocation = task.getResult();
                                 if (lastKnownLocation != null) {
                                     map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                                            new LatLng(lastKnownLocation.getLatitude(),
-                                                    lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                            // This is having trouble with the location, it thinks it's in America for some reason.
+                                            // For MVP demonstration its just hard coded to QUT, that's around where all the test services are anyway.
+//                                            new LatLng(lastKnownLocation.getLatitude(),
+//                                                    lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
+                                            new LatLng(-27.4773,
+                                                    153.0270), DEFAULT_ZOOM));
                                 }
                             } else {
                                 Log.d(TAG, "Current location is null. Using defaults.");
@@ -218,6 +244,7 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
                 Log.e("Exception: %s", e.getMessage(), e);
             }
         }
+
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (map != null) {
@@ -226,12 +253,12 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
         }
         super.onSaveInstanceState(outState);
     }
-        private void setViewIds () {
-            homeButton = findViewById(R.id.home);
-            criticalButton = findViewById(R.id.critical);
-            nearbyButton = findViewById(R.id.nearby);
-            settingsButton = findViewById(R.id.settings);
-        }
+    private void setViewIds () {
+        homeButton = findViewById(R.id.home);
+        criticalButton = findViewById(R.id.critical);
+        nearbyButton = findViewById(R.id.nearby);
+        settingsButton = findViewById(R.id.settings);
+    }
 
 
 }

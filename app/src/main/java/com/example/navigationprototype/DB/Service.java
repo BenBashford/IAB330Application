@@ -62,10 +62,10 @@ public class Service {
         this.latitude = latitude;
     }
 
-    public double getLongditude() {
+    public double getLongitude() {
         return longditude;
     }
-    public void setLongditudeint (int longditude) {this.longditude = longditude;
+    public void setLongitudeint (int longditude) {this.longditude = longditude;
     }
 
     public int getNumber() {
