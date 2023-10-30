@@ -53,6 +53,15 @@ public class CriticalServices extends AppCompatActivity {
                     MapToHereActivity.class);
             startActivity(intent);
         });
+
+        Button openDialerButton = findViewById(R.id.callButton);
+        openDialerButton.setOnClickListener(v -> {
+            // Create an Intent to open the dialer
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+
+            // Start the dialer activity
+            startActivity(intent);
+        });
     }
 
     private void setViewIds() {

@@ -210,6 +210,22 @@ public class MapToHereActivity extends AppCompatActivity
             }
         });
 
+        etAddress1 = findViewById(R.id.et_address1);
+        etAddress2 = findViewById(R.id.et_address2);
+
+        // Check if the intent is coming from the "Information" activity
+        boolean isFromInformation = getIntent().getBooleanExtra("fromInformation", false);
+
+        if (isFromInformation) {
+            // Retrieve the street address from the intent extras
+            String streetAddress = getIntent().getStringExtra("streetAddress");
+
+            // Check if the street address is not null and fill it in the EditText
+            if (streetAddress != null) {
+                etAddress2.setText(streetAddress);
+            }
+        }
+
     }
     // [END maps_current_place_on_create]
 
@@ -328,6 +344,7 @@ public class MapToHereActivity extends AppCompatActivity
                                                 lastKnownLocation.getLongitude()), DEFAULT_ZOOM));
                                 double latitude = lastKnownLocation.getLatitude();
                                 double longitude = lastKnownLocation.getLongitude();
+
                                 origin = new LatLng(latitude, longitude);
                                 RequestParams requestParams = new RequestParams("https://maps.googleapis.com/maps/api/geocode/json?latlng="+latitude+","+longitude+"&key="+getString(R.string.geo_api_key));
                                 x.http().get(requestParams, new Callback.CommonCallback<String>() {

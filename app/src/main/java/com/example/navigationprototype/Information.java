@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +27,8 @@ public class Information extends AppCompatActivity {
     private ImageView criticalButton;
     private ImageView nearbyButton;
     private ImageView settingsButton;
+
+    private Button viewOnMapButton;
 
     private TextView infoname;
     private TextView descname;
@@ -59,9 +62,28 @@ public class Information extends AppCompatActivity {
             startActivity(intent);
         });
 
+
         Intent intent2 = getIntent();
         int id = intent2.getExtras().getInt("id");
         GetDbContent(id);
+
+        viewOnMapButton.setOnClickListener(view -> {
+            String streetAddress = services.get(0).adress; // Assuming "adress" is the street address field in your Service object
+            Intent intent = new Intent(this, MapToHereActivity.class);
+            intent.putExtra("serviceId", id);
+            intent.putExtra("fromInformation", true); // Add this flag to indicate it's from Information
+            intent.putExtra("streetAddress", streetAddress);
+            startActivity(intent);
+        });
+
+        Button openDialerButton = findViewById(R.id.contact);
+        openDialerButton.setOnClickListener(v -> {
+            // Create an Intent to open the dialer
+            Intent intent = new Intent(Intent.ACTION_DIAL);
+
+            // Start the dialer activity
+            startActivity(intent);
+        });
 
     }
 
@@ -70,6 +92,7 @@ public class Information extends AppCompatActivity {
         criticalButton = findViewById(R.id.critical);
         nearbyButton = findViewById(R.id.nearby);
         settingsButton = findViewById(R.id.settings);
+        viewOnMapButton = findViewById(R.id.map);
 
 
         infoname = findViewById(R.id.service);
@@ -93,7 +116,7 @@ public class Information extends AppCompatActivity {
         Service service = services.get(0);
         infoname.setText(service.getName());
         descname.setText(service.getDescription());
-        String url = service.adress;
+        String url = service.website;
         online.setOnClickListener(view -> {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);

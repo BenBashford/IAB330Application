@@ -1,5 +1,7 @@
 package com.example.navigationprototype;
 
+import static android.location.Location.distanceBetween;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,8 +12,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.navigationprototype.DB.Service;
 import com.example.navigationprototype.DB.ServiceDAO;
@@ -32,6 +36,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -153,31 +159,113 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
         updateLocationUI();
     }
 
+    public class DistanceServicePair implements Comparable<DistanceServicePair> {
+        private float distance;
+        private Service service;
+
+        public DistanceServicePair(float distance, Service service) {
+            this.distance = distance;
+            this.service = service;
+        }
+
+        public float getDistance() {
+            return distance;
+        }
+
+        public Service getService() {
+            return service;
+        }
+
+        @Override
+        public int compareTo(DistanceServicePair other) {
+            // Compare by distance
+            return Float.compare(this.distance, other.distance);
+        }
+    }
+
     @Override
     public void onMapReady(GoogleMap map) {
         this.map = map;
 
-//        boolean success = map.setMapStyle(new MapStyleOptions(getResources()
-//                .getString(R.string.style_json)));
-//
-//        if (!success) {
-//            Log.e(TAG, "Style parsing failed.");
-//        }
+        boolean success = map.setMapStyle(new MapStyleOptions(getResources()
+                .getString(R.string.style_json)));
 
+        if (!success) {
+            Log.e(TAG, "Style parsing failed.");
+        }
 
         ServiceDAO serviceDAO = MyApp.getAppDatabase().serviceDao();
         serviceDAO.getAllServices().observe(this, services -> {
             // Update the map with the new list of services
+
+            List<DistanceServicePair> distanceServicePairs = new ArrayList<>();
             for (Service service : services) {
-                LatLng serviceLocation = new LatLng(service.getLatitude(), service.getLongitude());
+
+                    Location userLocation = new Location("UserLocation");
+                    userLocation.setLatitude(-27.4773);
+                    userLocation.setLongitude(153.0270);
+
+                    Location serviceLocation = new Location("ServiceLocation");
+                    serviceLocation.setLatitude(service.getLatitude());
+                    serviceLocation.setLongitude(service.getLongitude());
+
+                    float distance = userLocation.distanceTo(serviceLocation);
+                    distanceServicePairs.add(new DistanceServicePair(distance, service));
+
+            }
+
+                // Sort the list by distance
+                Collections.sort(distanceServicePairs);
+
+                // Create a list to store the three closest services
+                List<Service> closestServices = new ArrayList<>();
+
+                // Get the three closest services
+                for (int i = 0; i < Math.min(3, distanceServicePairs.size()); i++) {
+                    closestServices.add(distanceServicePairs.get(i).getService());
+                }
 
                 // Add a marker for each service
-                map.addMarker(new MarkerOptions()
-                                .position(serviceLocation)
-                                .title(service.getName())
-                        // Add additional information as needed
+                for (Service service : closestServices) {
+                    LatLng serviceLocation = new LatLng(service.getLatitude(), service.getLongitude());
+                    map.addMarker(new MarkerOptions()
+                                    .position(serviceLocation)
+                                    .title(service.getName())
+                            // Add additional information as needed
                 );
             }
+            TextView ServiceName1 = findViewById(R.id.ServiceName1);
+            TextView Distance1 = findViewById(R.id.Distance1);
+            TextView Description1 = findViewById(R.id.Description1);
+            TextView ServiceName2 = findViewById(R.id.ServiceName2);
+            TextView Distance2 = findViewById(R.id.Distance2);
+            TextView Description2 = findViewById(R.id.Description2);
+            TextView ServiceName3 = findViewById(R.id.ServiceName3);
+            TextView Distance3 = findViewById(R.id.Distance3);
+            TextView Description3 = findViewById(R.id.Description3);
+
+            for (int i = 0; i < closestServices.size(); i++) {
+                String serviceName = closestServices.get(i).getName();
+                String distance = String.valueOf(distanceServicePairs.get(i).getDistance());
+                String description = closestServices.get(i).getDescription();
+
+                if (i == 0) {
+                    ServiceName1.setText(Html.fromHtml("<b>" + serviceName + "</b>"));
+                    Distance1.setText(Html.fromHtml("<b>Distance:</b><br>" + distance + "m"));
+                    Description1.setText(Html.fromHtml("<b>Description</b>:<br>" + description));
+                } else if (i == 1) {
+                    ServiceName2.setText(Html.fromHtml("<b>" + serviceName + "</b>"));
+                    Distance2.setText(Html.fromHtml("<b>Distance:</b><br>" + distance + "m"));
+                    Description2.setText(Html.fromHtml("<b>Description</b>:<br>" + description));
+                } else if (i == 2) {
+                    ServiceName3.setText(Html.fromHtml("<b>" + serviceName + "</b>"));
+                    Distance3.setText(Html.fromHtml("<b>Distance:</b><br>" + distance + "m"));
+                    Description3.setText(Html.fromHtml("<b>Description</b>:<br>" + description));
+                }
+
+                // Update the TextViews based on i (0, 1, 2)
+            }
+
         });
 
         // ...
@@ -188,6 +276,8 @@ public class NearYou extends AppCompatActivity implements OnMapReadyCallback {
         // Get the current location of the device and set the position of the map.
         getDeviceLocation();
     }
+
+
 
     private void updateLocationUI() {
         if (map == null) {

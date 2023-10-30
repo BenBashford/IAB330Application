@@ -15,7 +15,9 @@ public class Service {
     public int number;
     public String adress;
 
-    public Service (String name, String description, int catagory, double latitude, double longditude, int number, String adress) {
+    public String website;
+
+    public Service (String name, String description, int catagory, double latitude, double longditude, int number, String adress, String website) {
         this.name = name;
         this.description = description;
         this.catagory = catagory;
@@ -23,6 +25,7 @@ public class Service {
         this.longditude = longditude;
         this.number = number;
         this.adress= adress;
+        this.website = website;
     }
 
     public int getId() {
@@ -73,6 +76,10 @@ public class Service {
     }
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public String getWebsite(){
+        return website;
     }
 
 }
