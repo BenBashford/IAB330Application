@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name=".Utils.MyApp"
@@ -31,12 +31,18 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:value="AIzaSyBi9UHXNCAuhHRkUkwROfAGQbX_soIJG5U" />
 
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
+        <activity
+            android:name=".LocationSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".MapToHereActivity"
+            android:exported="false" />
         <activity
             android:name=".Map"
             android:exported="false" />
